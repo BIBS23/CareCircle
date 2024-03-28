@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:hackxite/Screens/oldage_home_details_page.dart';
+import 'package:hackxite/controller/login.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,12 +14,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isExpanded = false;
+  AuthController auth = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('CareCircle'),
         scrolledUnderElevation: 0,
+        actions: [
+          IconButton(
+              onPressed: () {
+                auth.signOut();
+              },
+              icon: Icon(Icons.logout))
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(15),
@@ -107,8 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    OldAgeHomeDetailsScreen(),
+                                builder: (context) => OldAgeHomeDetailsScreen(),
                               ),
                             );
                           },

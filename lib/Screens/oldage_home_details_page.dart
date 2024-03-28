@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:hackxite/controller/add_to_chat.dart';
 
 class OldAgeHomeDetailsScreen extends StatefulWidget {
   const OldAgeHomeDetailsScreen({super.key});
@@ -13,6 +16,7 @@ class OldAgeHomeDetailsScreen extends StatefulWidget {
 class _OldAgeHomeDetailsScreenState extends State<OldAgeHomeDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    AddChat addChat = Get.find();
     return Scaffold(
       appBar: AppBar(
         title: Text('OldAge Home Name'),
@@ -48,7 +52,10 @@ class _OldAgeHomeDetailsScreenState extends State<OldAgeHomeDetailsScreen> {
                     style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8))),
-                    onPressed: () {},
+                    onPressed: () {
+                      addChat.addToChat('Blossoming Age Villa',
+                          FirebaseAuth.instance.currentUser!.uid.toString());
+                    },
                     child: Text('Add to chat'),
                   ),
                   OutlinedButton(
@@ -62,27 +69,21 @@ class _OldAgeHomeDetailsScreenState extends State<OldAgeHomeDetailsScreen> {
               ),
               SizedBox(height: 10),
               GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 4,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    
                       crossAxisCount: 3),
                   itemBuilder: (context, index) {
                     return Container(
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                       
-                        border: Border.all(
-                          color: Colors.white
-                        ),
-                        image: DecorationImage(image: NetworkImage('https://imgs.search.brave.com/QfLcnmEnFLKNUf5Xu-VKPOCmYtVDQxddeUXP9rKw5XQ/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3cy4xMjNyZi5j/b20vaW1hZ2VzL2Jp/YWxhc2lld2ljei9i/aWFsYXNpZXdpY3ox/NTA2L2JpYWxhc2ll/d2ljejE1MDYwMDc4/Mi80ODE2Nzc2MS1o/YXBweS1wZW9wbGUt/YmVpbmctaW4tcmVs/YXRpb25zaGlwLWlu/LW9sZC1hZ2UuanBn'
-                        
-                        ),
-                        fit: BoxFit.cover
-                        )
-                      ),
+                          border: Border.all(color: Colors.white),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  'https://imgs.search.brave.com/QfLcnmEnFLKNUf5Xu-VKPOCmYtVDQxddeUXP9rKw5XQ/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3cy4xMjNyZi5j/b20vaW1hZ2VzL2Jp/YWxhc2lld2ljei9i/aWFsYXNpZXdpY3ox/NTA2L2JpYWxhc2ll/d2ljejE1MDYwMDc4/Mi80ODE2Nzc2MS1o/YXBweS1wZW9wbGUt/YmVpbmctaW4tcmVs/YXRpb25zaGlwLWlu/LW9sZC1hZ2UuanBn'),
+                              fit: BoxFit.cover)),
                     );
                   })
             ],
