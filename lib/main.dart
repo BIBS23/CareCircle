@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackxite/Screens/bottom_nav.dart';
 import 'package:hackxite/Screens/home.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: BottomNav(),
     );
   }
 }
