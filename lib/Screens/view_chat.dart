@@ -11,9 +11,9 @@ import 'package:image_picker/image_picker.dart';
 
 
 class ViewChatScreen extends StatefulWidget {
-  final String usermail;
-  final String mail;
-  const ViewChatScreen({required this.usermail, Key? key, required this.mail})
+  final String recieverMail;
+  final String author;
+  const ViewChatScreen({required this.recieverMail, Key? key, required this.author})
       : super(key: key);
 
   @override
@@ -49,7 +49,7 @@ class _ChatScreenState extends State<ViewChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List ids = [widget.usermail, widget.mail];
+    List ids = [widget.author, widget.recieverMail];
 
     ids.sort();
     String chatdoc = ids.join("_");
@@ -211,9 +211,9 @@ class _ChatScreenState extends State<ViewChatScreen> {
                                         if (access.imageUrl != null) {
                                           await chatRoom.addMessage(
                                               '',
-                                              widget.usermail,
+                                              widget.author,
                                               context,
-                                              widget.mail,
+                                              widget.recieverMail,
                                               chatdoc,
                                               access.imageUrl.toString(),
                                               _controller.text);
@@ -274,9 +274,9 @@ class _ChatScreenState extends State<ViewChatScreen> {
                             if (chatcontroller.text != '') {
                               chatRoom.addMessage(
                                   chatcontroller.text,
-                                  widget.usermail,
+                                  widget.recieverMail,
                                   context,
-                                  widget.mail,
+                                  widget.author,
                                   chatdoc,
                                   '',
                                   '');
@@ -298,7 +298,7 @@ class _ChatScreenState extends State<ViewChatScreen> {
       appBar: AppBar(
        
         title: Text(
-          widget.usermail,
+          widget.recieverMail,
           style: const TextStyle(letterSpacing: 5,fontSize: 15),
         ),
         centerTitle: true,

@@ -6,6 +6,7 @@ import 'package:hackxite/Screens/bottom_nav.dart';
 import 'package:hackxite/Screens/home.dart';
 import 'package:hackxite/Screens/login.dart';
 import 'package:hackxite/controller/access_storage.dart';
+import 'package:hackxite/controller/add_post.dart';
 import 'package:hackxite/controller/add_to_chat.dart';
 import 'package:hackxite/controller/adduser.dart';
 import 'package:hackxite/controller/chatroom_controller.dart';
@@ -83,6 +84,9 @@ class _MyAppState extends State<MyApp> {
           );
            Get.put(
            AccessStorage()
+          );
+          Get.put(
+           AddPost()
           );
         },
       ),

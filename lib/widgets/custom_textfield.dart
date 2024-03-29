@@ -4,16 +4,17 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final bool obscureText;
   final Color color;
-  final TextEditingController controller;
+  final TextEditingController txtController;
   const CustomTextField(
       {super.key,
       required this.obscureText,
       required this.hint,
       required this.color,
-      required this.controller,
+      required this.txtController,
       });
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
@@ -23,9 +24,10 @@ class CustomTextField extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: TextField(
+          child: TextFormField(
+            
             obscureText: obscureText,
-            controller: controller,
+            controller: txtController,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hint,

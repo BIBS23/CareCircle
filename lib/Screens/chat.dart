@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,9 @@ class _ChatScreenState extends State<ChatScreen> {
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CupertinoActivityIndicator());
+              return const Center(
+                child: CupertinoActivityIndicator(),
+              );
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
@@ -47,13 +50,13 @@ class _ChatScreenState extends State<ChatScreen> {
                         child: CircleAvatar(
                           backgroundColor: Colors.deepPurple,
                           child: Text(
-                            documentSnapshot['userName'][0],
+                            documentSnapshot['userMail'][0],
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
                       title: Text(
-                        documentSnapshot['userName'],
+                        documentSnapshot['userMail'],
                         style: const TextStyle(
                           letterSpacing: 3,
                           fontSize: 15,
@@ -62,10 +65,14 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewChatScreen(
-                                  usermail: documentSnapshot['userName'], mail: FirebaseAuth.instance.currentUser!.email.toString())));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ViewChatScreen(
+                            recieverMail: documentSnapshot['userMail'],
+                            author: FirebaseAuth.instance.currentUser!.email.toString()
+                          ),
+                        ),
+                      );
                     },
                   );
                 },

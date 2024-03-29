@@ -32,11 +32,15 @@ class AuthController extends GetxController {
   Future<void> signIn(
       String email, String password, BuildContext context) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth
+          .signInWithEmailAndPassword(
         email: email,
         password: password,
-      );
-      Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+      )
+          .then((value) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/home', (route) => false);
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Get.snackbar(
@@ -63,9 +67,11 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut(BuildContext context) async {
     try {
-      await _firebaseAuth.signOut();
+      await _firebaseAuth.signOut().then((value) {
+         Navigator.of(context).pushNamedAndRemoveUntil('/signout', (route) => false);
+      });
     } catch (e) {
       print(e);
     }

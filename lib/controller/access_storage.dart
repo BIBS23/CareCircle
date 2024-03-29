@@ -44,6 +44,7 @@ class AccessStorage extends GetxController {
 
         await referenceImageToUpload.putFile(File(_image!.path));
         _imageUrl = await referenceImageToUpload.getDownloadURL();
+        print(_imageUrl);
       } catch (error) {
         // Handle error
       }
